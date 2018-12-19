@@ -4,7 +4,9 @@
       <h3 class="panel-title">Chat - 土豆机器人</h3>
     </div>
     <div class="panel-body" ref="msgContainer">
-      <chat-msg class="chat-msg" v-for="(msg,idx) in messages" :message="msg" :key="idx"></chat-msg>
+      <div class="msg" v-for="(msg,idx) in messages">
+        <chat-msg class="chat-msg" :message="msg" :key="idx"></chat-msg>
+      </div>
     </div>
     <div class="panel-footer">
       <div class="m-footer">
@@ -297,7 +299,7 @@
     width: 100%;
   }
 
-  .chat-msg:not(:first-child) {
+  .msg:not(:first-child) {
     margin-top: 1em;
   }
 

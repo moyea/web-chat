@@ -9,7 +9,7 @@
       <div v-for="(img,idx) in message.images" :key="idx">
         <img class="msg-img" v-if="img" :src="img" alt="">
       </div>
-      <p class="text-muted">{{message.name}} * {{message.sendAt | fromNow}}</p>
+      <!--<p class="text-muted">{{message.name}} * {{message.sendAt | fromNow}}</p>-->
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@
   .msg-container {
     position: relative;
     padding-left: 40px;
+    display: inline-block;
   }
 
   .msg-container.sent {
