@@ -1,10 +1,14 @@
 <template>
-  <div class="msg-container" :class="{'sent':!incoming}">
+  <div class="msg-container" :class="{'sent':incoming}">
     <div class="avatar">
       <img class="img-responsive" src="../assets/images/avatars/male-avatar-1.png" alt="">
     </div>
     <div class="messages">
-      <p>{{message.text}}</p>
+      <p v-if="!message.link&&message.text">{{message.text}}</p>
+      <a v-if="message.link" target="_blank" :href="message.link">{{message.text}}</a>
+      <div v-for="(img,idx) in message.images" :key="idx">
+        <img class="msg-img" v-if="img" :src="img" alt="">
+      </div>
       <p class="text-muted">{{message.name}} * {{message.sendAt | fromNow}}</p>
     </div>
   </div>
@@ -19,7 +23,8 @@
         default: () => ({
           name: '',
           text: '',
-          sendAt: Date.now()
+          sendAt: Date.now(),
+          images: []
         })
       }
     },
@@ -68,5 +73,10 @@
     margin-bottom: 0;
     font-size: 16px;
     line-height: 1.8;
+    word-break: break-all;
+  }
+
+  .msg-img {
+    max-width: 150px;
   }
 </style>

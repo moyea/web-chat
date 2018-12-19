@@ -2,14 +2,33 @@
   <div class="room-selection">
     <h1>土豆机器人</h1>
     <p class="instructions">请输入你的姓名开始对话</p>
-    <input type="text" class="input-line" placeholder="">
-    <button class="btn btn-primary btn-lg start-btn" @click="$router.push('/chat')">开始</button>
+    <input type="text" v-model="name" class="input-line" placeholder="">
+    <button class="btn btn-primary btn-lg start-btn" @click="onClick">开始</button>
   </div>
 </template>
 
 <script>
+  import store from '../services/store';
+  import {getStore, setStore} from '../services/utils';
+
   export default {
-    name: 'page-login'
+    name: 'page-login',
+    data() {
+      return {
+        name: ''
+      };
+    },
+    mounted() {
+      this.name = getStore('username') || '';
+    },
+    methods: {
+      onClick() {
+        store.name = this.name;
+        setStore('username', store.name);
+        this.$router.push('/chat');
+      }
+    }
+
   };
 </script>
 
@@ -34,6 +53,7 @@
     font-size: 18px;
     line-height: 2;
     border-bottom: 1px solid #ccc;
+    border-radius: 0;
   }
 
   .start-btn {
